@@ -5,7 +5,7 @@ import { fetchDailyData } from '../../api';
 
 import styles from './Chart.module.css';
 
-const ChartComponent = ({ data: { confirmed, recovered, deaths }, country }) => {
+const ChartComponent = ({ stats: { confirmed, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const ChartComponent = ({ data: { confirmed, recovered, deaths }, country }) => 
 
   return (
     <div className={styles.container}>
-      {country ? barChart : lineChart}
+      {country !== 'global' ? barChart : lineChart}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Grid, Typography } from '@material-ui/core'
 import CardComponent from './Card/CardComponent'
 import styles from './Container.module.css'
 
-const CardContainer = ({ worldStats: { confirmed, recovered, deaths, lastUpdate }}) => {
+const CardContainer = ({ stats: { confirmed, recovered, deaths, lastUpdate }}) => {
   
   if (!confirmed) return <p>Loading Stats...</p>
 

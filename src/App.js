@@ -6,24 +6,38 @@ import styles from './App.module.css'
 
 const App = () => {
 
-  const [worldStats, setWorldStats] = useState({})
+  const [stats, setStats] = useState({
+    country: '',
+    statsObject: {}
+  })
+
 
   const getWorldStats = async () => {
     const data = await fetchData();
-    setWorldStats(data)
+    setStats({country:'global', statsObject:data})
   };
 
   useEffect(() => {
     getWorldStats()
   }, [])
 
+  const handleCountryChange = async (country) => {
+    // get stats data for the country selected
+    const countryStats = await fetchData(country);
+    // set selected country
+    setStats({country, statsObject:countryStats})
+  };
+  
+  
+
   return (
     <div className={styles.container}>
-      <CardContainer worldStats={ worldStats }/>
-      <CountrySelector />
-      <Chart />
+      <CardContainer stats={stats.statsObject} />
+      <CountrySelector handleCountryChange={handleCountryChange} />
+      <Chart stats={stats.statsObject} country={ stats.country }/> 
+     
+      
     </div>
   );
 }
-
 export default App;
