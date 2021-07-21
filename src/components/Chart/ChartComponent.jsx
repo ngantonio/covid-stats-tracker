@@ -40,6 +40,11 @@ const ChartComponent = ({ stats: { confirmed, recovered, deaths }, country }) =>
     ) : null
   );
 
+  const name = (params) => {
+    // content
+  };
+  
+
   /** LINE CHART COMPONENT FOR GLOBAL DATA */
   const lineChart = (
     dailyData[0] ? (

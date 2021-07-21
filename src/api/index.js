@@ -4,7 +4,7 @@ const urlBase = 'https://covid19.mathdro.id/api';
 
 export const fetchData = async (country) => {
   let changeableUrl = urlBase;
-  if (country) changeableUrl = `${urlBase}/countries/${country}`;
+  if (country !== 'global') changeableUrl = `${urlBase}/countries/${country}`;
 
   try {
     const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(changeableUrl);
@@ -19,7 +19,7 @@ export const fetchData = async (country) => {
    try {
      const { data } = await axios.get(`${urlBase}/daily`);
 
-     return data.map(({ confirmed, deaths, reportDate: date }) => ({ confirmed: confirmed.total, deaths: deaths.total, date }));
+     return data.map(({ confirmed, deaths, recovered, reportDate: date }) => ({ confirmed: confirmed.total, deaths: deaths.total, recovered:recovered.total, date }));
    } catch (error) {
      return error;
    }
